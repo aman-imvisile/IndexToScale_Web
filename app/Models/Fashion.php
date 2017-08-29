@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Fashion extends Model
+{
+    protected $table = 'fashion';
+	protected $fillable = ['title','image'];
+}
