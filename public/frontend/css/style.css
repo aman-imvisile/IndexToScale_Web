@@ -8,7 +8,7 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	font-size: 14px;
+	font-size: 14px;position:relative;
 	font-family: 'Open Sans', sans-serif;
 }
 /* start loader*/
@@ -390,9 +390,9 @@ transform: rotate(-60deg);
 */
 
 .bottom-left{
-position:;
+position:absolute;
 left:0px;
-bottom:100px;	
+bottom:10px;	
 }.hexagon {
    position: relative;
     width: 25px;
@@ -871,7 +871,7 @@ width:360px;height:100%;z-index:100;top:0px;right:0px;border: 1px solid #cdcdcd;
 }
 .result-num{
     font-size: 16px;
-    text-align: right;
+    text-align: right;position:relative;z-index:10000;
     padding: 0px 30px;    margin-bottom: 0px;
     margin-top: 10px;font-weight:600;
 }
@@ -942,16 +942,16 @@ color:#026290;
 }
 .togle-butn-right{
     position: absolute;
-    width: 30px;
-    height: 45px;
+    width: 23px;
+    height: 32px;
   	right:0px; 
     background: #fff;
     border: 1px solid #808080 ;
     color: #808080 ;
-    font-size: 22px;
-    line-height: 45px;
+    font-size: 16px;
+    line-height: 32px;
     text-align: center;
-    top: -50px;
+    top: -38px;
     cursor: pointer;
     z-index: 1000;
     margin-left: -32px;
@@ -959,19 +959,19 @@ color:#026290;
 }
 
 .togle-butn-left{
-    position: absolute;
-    width: 30px;
-    height: 45px;
-    right:360px;  
+   position: absolute;
+    width: 23px;
+    height: 32px;
+    right: 360px;
     background: #fff;
-    border: 1px solid #808080 ;
-    color: #808080 ;
-    font-size: 22px;
-    line-height: 45px;
+    border: 1px solid #808080;
+    color: #808080;
+    font-size: 16px;
+    line-height: 32px;
     text-align: center;
-    top: -50px;
+    top: -38px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10000;
     margin-left: -32px;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
 }
@@ -1052,6 +1052,121 @@ border-radius:30px;
 color:#fff;padding: 5px 10px;
     text-transform: uppercase;    border-color: #000;	
 }
+
+.filter_right > ul {
+margin-top: 78px;
+}
+
+
+.index_tab li {
+    border-radius: 30px;
+ 	width: 50%;text-align: center;
+}
+.nav.index_tab > li > a{
+padding: 5px 0px 5px 10px;border-radius: 30px;color:#000;cursor:pointer; text-align:center;
+}
+.index_tab{
+   max-width: 80%;
+    margin: 20px auto;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.8);
+	border-bottom:none;
+}
+.index_tab li a{
+      background: transparent;
+}
+
+.nav.index_tab > li > a:hover, .nav.index_tab > li > a:focus{
+	background-color: #fff;border-color: transparent;
+}
+
+.accor-heading{
+color:#fff;	
+}
+.padd-filter{
+	 padding: 10px 30px 10px;
+}
+h4.padd-filter{
+    padding: 10px 30px 10px;    margin: 0px;
+	    font-size: 16px;	 background: rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+input[type=checkbox].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: 0px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+label.css-label {
+    background-image: url(../images/checkbox.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left: 26px;
+    height: 21px;
+    display: inline-block;
+    line-height: 21px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 13px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -21px;
+}.status_check{
+    padding: 0px 40px;
+    list-style: none;	
+}.status_check li {
+    padding-bottom: 10px;
+}
+.more-less {
+    margin-right: 15px;
+}
+.num-opac{
+opacity:0.8;
+font-size:90%; margin-left:5px;
+}
+.status_check p{
+	padding: 0px 28px; font-size: 13px;
+}
+.input-text{
+position:relative;
+width:80px;    color: #333;
+    padding-left: 16px;
+}
+.curr-syb{
+ position: absolute;
+    left: 22px;
+    color: #333333;
+    top: 2px;
+
+}
+.sub-right{
+color: #fff;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    padding-left: 15px;	
+}
+h4.padd-filter.collapsed{
+background:transparent;
+}
+.tab-content {
+    position: relative;
+}
+
 @media (min-width: 768px){
 .navbar-nav > li > a {
     padding-top: 8px;

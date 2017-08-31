@@ -10,11 +10,12 @@
 <div class="container-fluid">
     <div class="row">
     <div class="col-sm-12">
+      	<input type="hidden" id="main_cat_id" value="{{$categories['main_cat_id']}}">
+        <input type="hidden" id="sub_cat_id" value="{{$categories['sub_cat_id']}}">
     	<div class="residential_grid">
         	<ul class="residential_grid_ul">
             	  @if(count($properties))
-            	<input type="hidden" id="main_cat_id" value="{{$categories['main_cat_id']}}">
-            	<input type="hidden" id="sub_cat_id" value="{{$categories['sub_cat_id']}}">
+          
                	  @foreach($properties as $property)
             	<li>
                     <div class="residential_img property-detail-view" property-id="{{$property->id}}">
@@ -37,7 +38,7 @@
                  	 @endif
                         	<li>
                         	      	<div class="col-sm-3 col-xs-3">
-                                    	<img  src="{{$links->icon_image}}" class="img-responsive">
+                                    <img src="{{$links->icon_image}}" class="img-responsive">
                                     </div>
                                     <div class="col-sm-9 col-xs-9 text-right">
                                     	<h4>{{$links->main_title}}</h4>
@@ -77,18 +78,80 @@
  <section id="view-single-property" style="display:none;" class="filter_result">
  
 </section>
+ 
+
+</section>
 <section class="filter_right" style="display:none;">
 
-      <ul class="nav nav-tabs responsive">
-        <li class="active"><a href="#home-test-new">Filters</a></li>
-        <li><a href="#profile-test-new">Indexes</a></li>
+      <ul class="nav nav-tabs responsive index_tab">
+        <li class="active"><a href="#home-test-new"><span style="padding-right: 25px;">12</span>Filters</a></li>
+        <li><a href="#profile-test-new">Indexes<span  style="padding-left: 25px;">12</span></a></li>
       </ul>
       <div class="tab-content responsive">
             
        <div class="tab-pane active" id="home-test-new">
-          <input class="filter-property" type="checkbox" name="short_let" value="short let "> short let<br>
-          <input class="filter-property"  type="checkbox" name="to_let" value="to let "> To let<br>
-		  <input class="filter-property" type="checkbox" name="for_sale" value="for sale"> For sale<br>
+          <div class="panel-group " id="accordion">
+        <div class="accor-heading">
+            <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapseOne" class="padd-filter collapsed">
+            	<i class="more-less  fa fa-plus"></i>  Location  </h4>
+            <div id="collapse1" class="panel-collapse  collapse">
+              <div class="panel-body">
+              <ul class="status_check">
+              		<li>
+                        <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
+                        <label for="checkboxG1" class="css-label">Option 1</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checkboxG1" id="checkboxG2" class="css-checkbox" />
+                        <label for="checkboxG2" class="css-label">Option 1</label>
+                    </li>
+                    </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accor-heading">
+            <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapseOne" class="padd-filter ">
+            	<i class="more-less  fa fa-plus"></i>  Status  </h4>
+            <div id="collapse2" class="panel-collapse  collapse in">
+              <div class="panel-body">
+              <ul class="status_check">
+              	
+                   <li>
+                   <input class="filter-property css-checkbox" id="short_let" type="checkbox" name="short_let" value="short let "> 
+                   <label for="short_let" class="css-label">short let</label>
+                   </li>
+                   <li>
+          		   <input class="filter-property css-checkbox" id="to_let" type="checkbox" name="to_let" value="to let "> 
+          		   <label for="to_let" class="css-label">To let</label>
+          		   </li>
+          		   <li>
+		  		   <input class="filter-property css-checkbox" id="for_sale" type="checkbox" name="for_sale" value="for sale"> 
+		  		   <label for="for_sale" class="css-label">For sale<span class="num-opac">(23,400)</span></label>
+		  		   <p> <i class="fa fa-gbp" aria-hidden="true"></i>0 - <i class="fa fa-gbp" aria-hidden="true"></i>234569 <span class="num-opac">(23,400)</span></p>
+                         <p> <i class="fa fa-gbp" aria-hidden="true"></i>0 - <i class="fa fa-gbp" aria-hidden="true"></i>234569 <span class="num-opac">(23,400)</span></p>
+                          <p> <i class="fa fa-gbp" aria-hidden="true"></i>0 - <i class="fa fa-gbp" aria-hidden="true"></i>234569</p>
+                       	    <div class="col-sm-4 ">                        
+                        	<input type="text" class="input-text"> <span class="curr-syb"> <i class="fa fa-gbp" aria-hidden="true"></i></span> 
+                            </div>
+                            <div class="col-sm-2 text-center no-padd">
+                            to 
+                            </div>
+                            <div class="col-sm-4 ">
+                            <input type="text" class="input-text"> <span class="curr-syb"> <i class="fa fa-gbp" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="col-sm-2">
+                            <button type="submit" class="sub-right">
+                              <i class="fa fa-chevron-circle-right"></i>
+                            </button>
+                            </div>
+		  		   </li>
+                 
+                    </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
 	   </div>
 		
 		<div class="tab-pane" id="profile-test-new">
@@ -97,9 +160,7 @@
 		
       </div>
 
-  </section> 
-
-</section>
+  </section>
 <section class="bottom-left">
   <div class="container-fluid">
     <div class="row">
@@ -111,11 +172,10 @@
        
        <div class="ques_menu" style="display: none;">
        <ul>
-          <li><span class=""><img src="images/inex_s.png"></span>   Get Our browser button to index faster</li>
+          <li><span class=""><img src="images/inex_s.png"></span>Get Our browser button to index faster</li>
            <li><span class="icon-file_upload"></span>   Upload</li>
-           <li>   <span class="icon-link3"> </span>Set Visit Link</li>
-           <li>  <span class="icon-globe"></span>Index from Websites</li>
-         
+           <li><span class="icon-link3"> </span>Set Visit Link</li>
+           <li><span class="icon-globe"></span>Index from Websites</li>         
        </ul>
        </div>
       </div>

@@ -109,8 +109,8 @@ class RegisterController extends Controller
                 				'profile_image' => $filename,
                 				'profile_thumbnail'=>$thumbnail,
                 				'user_type'		=> '2', 
-								'privileges'	=> '1',
-								'permission'	=> '1'
+								'privileges'	=> '',
+								'permission'	=> ''
             			]);
             
    			if(isset($user))

@@ -62,9 +62,14 @@
             	
               <li class=""><a href="{{url('/')}}">Home</a></li>    
             @if(count($main_category_data))
-            @foreach($main_category_data as $category)          
-             <li class="dropdown mega-dropdown active" > 
-<!--               <a class="dropdown-toggle" data-toggle="dropdown" href="{{url('property/list/'.$category->main_category_id.'/'.$category->id)}}">{{$category->main_category_name}} <span class="caret"></span></a> -->
+            @foreach($main_category_data as $key=>$category) 
+       
+            @if($category->id==$catid)         
+             <li class="dropdown mega-dropdown active" >
+            @else
+             <li class="dropdown mega-dropdown " >
+            @endif  
+        <!--<a class="dropdown-toggle" data-toggle="dropdown" href="{{url('property/list/'.$category->main_category_id.'/'.$category->id)}}">{{$category->main_category_name}} <span class="caret"></span></a> -->
                <a class="dropdown-toggle"  href="{{url('subcategory/'.$category->id)}}">{{$category->main_category_name}} </a>
             <ul class="dropdown-menu mega-dropdown-menu ">
            <div class="row"> 

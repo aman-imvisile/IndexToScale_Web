@@ -21,9 +21,9 @@ var md5 = require('md5');
 /*-----db connection-------*/
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'imvisile_taxiinm',
-  password : '#~_Dm9l_V}a3',
-  database : 'imvisile_indextoscale'
+  user     : 'imvisi5_judgingasystem',
+  password : '@R&wPhdRTxp;',
+  database : 'imvisi5_indextoscale'
 });
 connection.connect();
  
@@ -185,10 +185,12 @@ app.post('/subscribe_Categories', function (req, res) {
   	var status_type = req.body.status_type;
   	var data = { "error":1, "info":"" };
 	
+	//console.log("userid: "+userid+"maincategory_id: "+maincategory_id+"subcategory_id: "+subcategory_id+"status_type: "+status_type);
+	
 	if(!!userid){
 	  if(!!maincategory_id){
 	   if(!!status_type){
-		var argsString = userid+","+maincategory_id+","+status_type+","+subcategory_id;	//console.log(argsString);
+		var argsString = userid+","+maincategory_id+","+status_type+","+subcategory_id;			//console.log(argsString);
         runner.exec('php -r \'include("api/subscribe_SubCategory.php") ; print json_encode($response);\' '+argsString+'', function(err, phpResponse, stderr) {
         if(err) console.log(err); /* log error */
             var connection = JSON.parse(phpResponse);	//console.log(connection);

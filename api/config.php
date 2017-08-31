@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
-$dbhandle = mysql_connect('localhost', 'imvisile_taxiinm','#~_Dm9l_V}a3') or die("Unable to connect to M");
-$selected = mysql_select_db("imvisile_indextoscale",$dbhandle) ;
+$dbhandle = mysql_connect('localhost', 'imvisi5_judgingasystem','@R&wPhdRTxp;') or die("Unable to connect to M");
+$selected = mysql_select_db("imvisi5_indextoscale",$dbhandle) ;
 
 
 

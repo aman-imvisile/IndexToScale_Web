@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     
     public function index()
-    {        
+    {
   		
         $mainCategories=MainCategories::select('*')->get();
         $maxSubCount=MainCategories::max('total_subscriptions');
