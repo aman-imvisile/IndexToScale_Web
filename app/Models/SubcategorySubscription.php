@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class SubcategorySubscription extends Model
-{    
-    
+{
     protected $table = 'subcategory_subscription';
     public $timestamps = false;
-    protected $fillable = ['main_category_id','subcategory_id','user_id','status_type'];    
-    
+    protected $fillable = ['main_category_id','subcategory_id','user_id','status_type'];
 }

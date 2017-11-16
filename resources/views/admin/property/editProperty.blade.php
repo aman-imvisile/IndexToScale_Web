@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 @section('title', 'Edit New Property')
+@section('menu_title', 'Staff')
 @section('content')
+    @include('admin.admin_users.header')
+    </div>
+</div>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
@@ -21,7 +25,7 @@
 		@endif
         <form id="propertyForm" method="post" action="{{url('admin/property/update')}}"  enctype="multipart/form-data" accept-charset="utf-8">
           	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-          	<input type="hidden" value="{{$property[0]['id']}}" name="id">
+          	<input type="hidden" value="{{$property['id']}}" name="id">
         <!-- SmartWizard html -->
         <div id="smartwizard">
             <ul>
@@ -33,11 +37,11 @@
                 <div id="step-1">
                       <h2 class="StepTitle wizard_steps_title text-center">Step 1 : Property Information</h2>
                       <div id="form-step-0" role="form" data-toggle="validator">
-                      <input type="hidden" value="{{$property[0]['id']}}" name="property_id">
+                      <input type="hidden" value="{{$property['id']}}" name="property_id">
                       
                         <div class="form-group col-md-6">
                         <label for="email">Address:</label>
-                        <input id="address" class="form-control col-md-7 col-xs-12" type="text" name="address" value="{{$property[0]['address']}}" required>
+                        <input id="address" class="form-control col-md-7 col-xs-12" type="text" name="address" value="{{$property['address']}}" required>
                           <div id="map"></div>
     					<div id="infowindow-content">
      					<img src="" width="16" height="16" id="place-icon">
@@ -49,17 +53,17 @@
 						<input id="latitude" type="hidden" name="latitude" value="30.7333">
 						<input id="longitude" type="hidden" name="longitude" value="76.7794">                            
                         </div>
-                        
+                           </div>
                         <div class="form-group col-md-6">
                         <label for="name">Street Number:</label>
-                        <input id="street_number" class="form-control col-md-7 col-xs-12" value="{{$property[0]['street_number']}}" type="text" name="street_number" required>
+                        <input id="street_number" class="form-control col-md-7 col-xs-12" value="{{$property['street_number']}}" type="text" name="street_number" required>
 						@if($errors->has('street_number'))
 						<div class="alert">{{ $errors->first('street_number') }}</div>
 						@endif
                         </div>
                         <div class="form-group col-md-6">
                         <label for="name">Street Name:</label>
-                        <input id="street_name" class="form-control col-md-7 col-xs-12" value="{{$property[0]['street_name']}}" type="text" name="street_name" required>
+                        <input id="street_name" class="form-control col-md-7 col-xs-12" value="{{$property['street_name']}}" type="text" name="street_name" required>
 						@if($errors->has('street_name'))
 						<div class="alert">{{ $errors->first('street_name') }}</div>
 						@endif
@@ -67,7 +71,7 @@
                         
                     	<div class="form-group col-md-6">
                         <label for="name">Pin Code:</label>
-                        <input id="postal_code" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['pincode']}}" name="pincode" required>
+                        <input id="postal_code" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['pincode']}}" name="pincode" required>
 						@if($errors->has('pincode'))
 						<div class="alert">{{ $errors->first('pincode') }}</div>
 						@endif
@@ -75,7 +79,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="name">Area:</label>
-                      		<input id="area" class="form-control col-md-7 col-xs-12" value="{{$property[0]['area']}}" type="text" name="area" required>
+                      		<input id="area" class="form-control col-md-7 col-xs-12" value="{{$property['area']}}" type="text" name="area" required>
 						@if($errors->has('area'))
 						<div class="alert">{{ $errors->first('area') }}</div>
 						@endif
@@ -83,7 +87,7 @@
                         
                        <div class="form-group col-md-6">
                        <label for="name">City:</label>
-                       	<input id="locality" class="form-control col-md-7 col-xs-12" value="{{$property[0]['city']}}" type="text" name="city" required>
+                       	<input id="locality" class="form-control col-md-7 col-xs-12" value="{{$property['city']}}" type="text" name="city" required>
 						@if($errors->has('city'))
 						<div class="alert">{{ $errors->first('city') }}</div>
 						@endif
@@ -91,13 +95,13 @@
                         
 						<div class="form-group col-md-6">
                         <label for="name">Country:</label>
-                         <input id="country" class="form-control col-md-7 col-xs-12" value="{{$property[0]['country']}}" type="text" name="country" required>
+                         <input id="country" class="form-control col-md-7 col-xs-12" value="{{$property['country']}}" type="text" name="country" required>
 						@if($errors->has('country'))
 						<div class="alert">{{ $errors->first('country') }}</div>
 						@endif
                         </div>
                         
-                    </div>
+                 
                     
                 
                 
@@ -107,7 +111,7 @@
                             <option value="">Choose option</option>
                             @if(count($propertyCategories))
                             @foreach($propertyCategories as $category)
-                            @if($category->id==$property[0]['sub_category_id'])
+                            @if($category->id==$property['sub_category_id'])
                             <option selected  value="{{$category->id}}"> {{$category->category_name}} </option>
                             @else 
                             <option value="{{$category->id}}"> {{$category->category_name}} </option>
@@ -122,15 +126,21 @@
                         
                         <div class="form-group col-md-6">
                         <label for="name">Property Name:</label>
-                     	<input type="text" id="property_name" name="property_name" value="{{$property[0]['property_name']}}"  required="required" class="form-control col-md-7 col-xs-12" >
+                     	<input type="text" id="property_name" name="property_name" value="{{$property['property_name']}}"  required="required" class="form-control col-md-7 col-xs-12" >
 						@if($errors->has('property_name'))
 						<div class="alert">{{ $errors->first('property_name') }}</div>
 						@endif
                         </div>
-                        
-                          	<div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
+							<label for="use_for">Property Use For:</label>
+							<input type="text" id="use_for" name="use_for" value="{{$property['use_for']}}" required="required" placeholder="to let, for sale, short let" class="form-control col-md-7 col-xs-12" >
+							@if($errors->has('use_for'))
+							<div class="alert">{{ $errors->first('use_for') }}</div>
+							@endif
+						</div>                        
+                        <div class="form-group col-md-6">
                         <label for="name">No. of Beds:</label>
-                      	<input id="num_beds" class="form-control col-md-7 col-xs-12" type="number" value="{{$property[0]['num_beds']}}"  name="num_beds" required>
+                      	<input id="num_beds" class="form-control col-md-7 col-xs-12" type="number" value="{{$property['num_beds']}}"  name="num_beds" required>
 						@if($errors->has('num_beds'))
 						<div class="alert">{{ $errors->first('num_beds') }}</div>
 						@endif
@@ -138,7 +148,7 @@
                         
                         	<div class="form-group col-md-6">
                         <label for="name">No. of Bathrooms:</label>
-                      	<input id="num_baths" class="form-control col-md-7 col-xs-12" type="number" value="{{$property[0]['num_baths']}}" name="num_baths" required>
+                      	<input id="num_baths" class="form-control col-md-7 col-xs-12" type="number" value="{{$property['num_baths']}}" name="num_baths" required>
 						@if($errors->has('num_baths'))
 						<div class="alert">{{ $errors->first('num_baths') }}</div>
 						@endif
@@ -157,9 +167,9 @@
                         
                         <div class="form-group col-md-6">
                         <div id='preview' class="preview">
-                        @if(count($property[0]['property_images']))
+                        @if(count($property['property_images']))
                         <?php $i=1; ?>
-                        @foreach($property[0]['property_images'] as $Proimage)
+                        @foreach($property['property_images'] as $Proimage)
                         <img src="{{$Proimage['image']}}" alt="" class="thumb"  /> 
                         <span class="remove_img_preview"></span>
                         @if($i==4)
@@ -181,7 +191,7 @@
                     <div id="form-step-1" role="form" data-toggle="validator">
                   	         <div class="form-group col-md-6">
                         <label for="address">Floor Area:<small> (in meters)</small></label>
-                        <input id="floor_area_meters" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['floor_area_meters']}}" name="floor_area_meters" required>
+                        <input id="floor_area_meters" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['floor_area_meters']}}" name="floor_area_meters" required>
 						@if($errors->has('floor_area_meters'))
 						<div class="alert">{{ $errors->first('floor_area_meters') }}</div>
 						@endif
@@ -189,7 +199,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="approx_geo">Approx Geo:</label>
-                        <input id="approx_geo" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['approx_geo']}}"  name="approx_geo" required>
+                        <input id="approx_geo" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['approx_geo']}}"  name="approx_geo" required>
 						@if($errors->has('approx_geo'))
 						<div class="alert">{{ $errors->first('approx_geo') }}</div>
 						@endif
@@ -197,7 +207,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="neighbourhood ">Neighbourhood</label>
-                        <input id="neighbourhood " class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['neighbourhood']}}"  name="neighbourhood" required>
+                        <input id="neighbourhood " class="form-control col-md-7 col-xs-12" type="text" value="{{$property['neighbourhood']}}"  name="neighbourhood" required>
 						@if($errors->has('neighbourhood'))
 						<div class="alert">{{ $errors->first('neighbourhood') }}</div>
 						@endif
@@ -205,7 +215,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="transport">Transport</label>
-                        <input id="transport" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['transport']}}" name="transport" required>
+                        <input id="transport" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['transport']}}" name="transport" required>
 						@if($errors->has('transport'))
 						<div class="alert">{{ $errors->first('transport') }}</div>
 						@endif
@@ -213,7 +223,7 @@
                         
                          <div class="form-group col-md-6">
                         <label for="address">Amenities</label>
-                        <input id="amenities" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['amenities']}}" name="amenities" required>
+                        <input id="amenities" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['amenities']}}" name="amenities" required>
 						@if($errors->has('amenities'))
 						<div class="alert">{{ $errors->first('amenities') }}</div>
 						@endif
@@ -221,7 +231,7 @@
                         
                              <div class="form-group col-md-6">
                             <label for="address">Interior</label>
-                         	<input id="interior" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['interior']}}" name="interior" required>
+                         	<input id="interior" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['interior']}}" name="interior" required>
 						@if($errors->has('interior'))
 						<div class="alert">{{ $errors->first('interior') }}</div>
 						@endif
@@ -230,7 +240,7 @@
                         
                              <div class="form-group col-md-6">
                             <label for="address">Exterior</label>
-                          	<input id="exterior" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['exterior']}}" name="exterior" required>
+                          	<input id="exterior" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['exterior']}}" name="exterior" required>
 						@if($errors->has('exterior'))
 						<div class="alert">{{ $errors->first('exterior') }}</div>
 						@endif
@@ -239,7 +249,7 @@
                         
                              <div class="form-group col-md-6">
                             <label for="address">Privacy</label>
-                           	<input id="privacy" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['privacy']}}" name="privacy" required>
+                           	<input id="privacy" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['privacy']}}" name="privacy" required>
 						@if($errors->has('privacy'))
 						<div class="alert">{{ $errors->first('privacy') }}</div>
 						@endif
@@ -247,7 +257,7 @@
                         
                                      <div class="form-group col-md-6">
                             <label for="terms">Floor Area</label>
-                         <input id="floor_area" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['floor_area']}}"  name="floor_area" required>
+                         <input id="floor_area" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['floor_area']}}"  name="floor_area" required>
 						@if($errors->has('floor_area'))
 						<div class="alert">{{ $errors->first('floor_area') }}</div>
 						@endif
@@ -256,7 +266,7 @@
                            <div class="form-group col-md-6">
                             <label for="terms">Prestige</label>
                       
-							<input id="prestige" class="form-control col-md-7 col-xs-12" value="{{$property[0]['prestige']}}"  type="text" name="prestige" required>
+							<input id="prestige" class="form-control col-md-7 col-xs-12" value="{{$property['prestige']}}"  type="text" name="prestige" required>
 						@if($errors->has('prestige'))
 						<div class="alert">{{ $errors->first('prestige') }}</div>
 						@endif
@@ -264,7 +274,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="area_safety ">Area Safety</label>
-                        <input id="area_safety " class="form-control col-md-7 col-xs-12" value="{{$property[0]['area_safety']}}" type="text" name="area_safety" required>
+                        <input id="area_safety " class="form-control col-md-7 col-xs-12" value="{{$property['area_safety']}}" type="text" name="area_safety" required>
 						@if($errors->has('area_safety'))
 						<div class="alert">{{ $errors->first('area_safety') }}</div>
 						@endif
@@ -273,7 +283,7 @@
                         
                            <div class="form-group col-md-6">
                             <label for="terms">Lot</label>
-                      	<input id="lot" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['lot']}}"  name="lot" required>
+                      	<input id="lot" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['lot']}}"  name="lot" required>
 						@if($errors->has('lot'))
 						<div class="alert">{{ $errors->first('lot') }}</div>
 						@endif
@@ -281,7 +291,7 @@
                         
                              <div class="form-group col-md-6">
                             <label for="views">views</label>
-                      	<input id="views" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['views']}}" name="views" required>
+                      	<input id="views" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['views']}}" name="views" required>
 						@if($errors->has('views'))
 						<div class="alert">{{ $errors->first('views') }}</div>
 						@endif
@@ -289,7 +299,7 @@
                         
                            <div class="form-group col-md-6">
                             <label for="terms">Sea-side</label>
-                         	<input id="seaside" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['seaside']}}" name="seaside" required>
+                         	<input id="seaside" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['seaside']}}" name="seaside" required>
 						@if($errors->has('seaside'))
 						<div class="alert">{{ $errors->first('seaside') }}</div>
 						@endif
@@ -297,7 +307,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="terms">River-side</label>
-                        <input id="riverside" class="form-control col-md-7 col-xs-12" type="text" value="{{$property[0]['riverside']}}" name="riverside" required>
+                        <input id="riverside" class="form-control col-md-7 col-xs-12" type="text" value="{{$property['riverside']}}" name="riverside" required>
 						@if($errors->has('riverside'))
 						<div class="alert">{{ $errors->first('riverside') }}</div>
 						@endif
@@ -306,7 +316,7 @@
                         
                         <div class="form-group col-md-6">
                         <label for="terms">Internet-Speed</label>
-                         <input id="internet_speed" class="form-control col-md-7 col-xs-12" type="text"  value="{{$property[0]['internet_speed']}}"  name="internet_speed" required>
+                         <input id="internet_speed" class="form-control col-md-7 col-xs-12" type="text"  value="{{$property['internet_speed']}}"  name="internet_speed" required>
 						 @if($errors->has('internet_speed'))
 						 <div class="alert">{{ $errors->first('internet_speed') }}</div>
 						 @endif
@@ -321,7 +331,7 @@
                  
                     <div id="form-step-2" role="form" data-toggle="validator">
                		
-                     @foreach($property[0]['property_links'] as $key=>$value)
+                     @foreach($property['property_links'] as $key=>$value)
                 	    
                      	@if($key==0)
                      	<div id="linksdata">
@@ -409,7 +419,13 @@
                     
                         </div>
                         </div>
-                        <span class="removeMore btn btn-danger">Remove </span></div>
+                          <div class="form-group ">
+                        <span class="removeMore btn btn-danger">Remove </span>
+                        </div>
+                        
+                        
+                        
+                        </div>
                         
                         @endif
                        @endforeach

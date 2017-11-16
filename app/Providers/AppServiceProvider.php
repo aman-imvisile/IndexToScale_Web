@@ -15,32 +15,30 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+	public function boot()
+	{
     	//To get main categories
 		$main_categories = MainCategories::with('subcategories')->get();		//	echo "<pre/>"; print_r($main_categories);
 		$adminusers = User::select('*')->where('user_type','=', '2') ->orderBy('id', 'desc')->get();
 		$privilege=array();
 		
-		
 		View::composer('includes.adminheader', function($view) use($main_categories,$adminusers) {
-			if(Auth::check())
-			{			
-			  $privileString=Auth::user()->privileges;
-			  $privileges=explode(',',$privileString);
-			}
-			$view->with(['main_category_data'=>$main_categories,'adminusers_data'=>$adminusers,'privileges'=>$privileges]);
-		});
-		View::composer('includes.simpleAdminHeader', function($view) use($main_categories,$adminusers) {
-			if(Auth::check())
-			{
+			if(Auth::check()){			
 			  $privileString=Auth::user()->privileges;
 			  $privileges=explode(',',$privileString);
 			}
 			$view->with(['main_category_data'=>$main_categories,'adminusers_data'=>$adminusers,'privileges'=>$privileges]);
 		});
 		
-			View::composer('includes.propertyCategoryHeader', function($view) use($main_categories) {					
+		View::composer('includes.simpleAdminHeader', function($view) use($main_categories,$adminusers) {
+			if(Auth::check()){
+			  $privileString=Auth::user()->privileges;
+			  $privileges=explode(',',$privileString);
+			}
+			$view->with(['main_category_data'=>$main_categories,'adminusers_data'=>$adminusers,'privileges'=>$privileges]);
+		});
+		
+		View::composer('includes.propertyCategoryHeader', function($view) use($main_categories) {					
 			$view->with(['main_category_data'=>$main_categories]);
 		});
 
@@ -54,6 +52,8 @@ class AppServiceProvider extends ServiceProvider
 		});
     
     }
+
+
 
     /**
      * Register any application services.

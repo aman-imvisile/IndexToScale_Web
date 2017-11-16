@@ -22,6 +22,8 @@ class FinanceController extends Controller
     	return view('admin.finance.addfinance',array('finance_data'=>$financedata));
     }
 	
+	
+	
 	/**
 	 * Show the form to add new propert
 	 *
@@ -30,22 +32,10 @@ class FinanceController extends Controller
 	public function addfinance(Request $request)
 	{
 		if(!empty($request->all())){
-		
-			$validator = Validator::make($request->all(),
-											[											
-											'finance_type'		=> 'required',
-    										'main_title'		=> 'required',
-    										'monthly_price'		=> 'required'//,
-//     										'sub_title'			=> 'required',
-//     										'yearly_price'		=> 'required' ,
-//     										'indexes'			=> 'required',
-//     										'updates'			=> 'required',
-//     										'trackings'			=> 'required',
-//     										'summary_chart'		=> 'required',
-//     										'personalities'		=> 'required',
-//     										'forecast_strategy'	=> 'required',
-//     										'early_bird'		=> 'required'
-    										
+			$validator = Validator::make($request->all(),[											
+				'finance_type'		=> 'required',
+    			'main_title'		=> 'required',
+    			'monthly_price'		=> 'required'
 			]);
 			
 			if($validator->fails()){    		
@@ -53,22 +43,21 @@ class FinanceController extends Controller
 			}
 			
 			$finance=Finance::create([											
-										'finance_type'		=>	$request->finance_type,										
-    									'main_title'		=>	$request->main_title,										
-    									'sub_title'			=>	$request->sub_title,										
-    									'monthly_price'		=>	$request->monthly_price,										
-    									'yearly_price'		=>	$request->yearly_price,										
-    									'indexes'			=>	$request->indexes,										
-    									'updates'			=>	$request->updates,										
-    									'trackings'			=>	$request->trackings,										
-    									'summary_chart'		=>	$request->summary_chart,										
-    									'personalities'		=>	$request->personalities,										
-    									'forecast_strategy'	=>	$request->forecast_strategy,										
-    									'early_bird'		=>	$request->early_bird									
+				'finance_type'		=>	$request->finance_type,										
+    			'main_title'		=>	$request->main_title,										
+    			'sub_title'			=>	$request->sub_title,										
+    			'monthly_price'		=>	$request->monthly_price,										
+    			'yearly_price'		=>	$request->yearly_price,										
+    			'indexes'			=>	$request->indexes,										
+    			'updates'			=>	$request->updates,										
+    			'trackings'			=>	$request->trackings,										
+    			'summary_chart'		=>	$request->summary_chart,										
+    			'personalities'		=>	$request->personalities,										
+    			'forecast_strategy'	=>	$request->forecast_strategy,										
+    			'early_bird'		=>	$request->early_bird									
 			]);
         		
         	if(isset($finance)){
-        	
 				Session::flash('message', "New finance added successfully!"); 
 				Session::flash('alert-class', 'alert-success'); 
 				return redirect('admin/finance/list/'.$request->finance_type);	
@@ -80,6 +69,7 @@ class FinanceController extends Controller
 	}
 	
 	
+	
 	/**
 	 * to Display all finance prices according finance type 
 	 *
@@ -87,8 +77,7 @@ class FinanceController extends Controller
 	 */	   	
 	public function financelist(Request $request,$finance_type)
 	{
-		$finance_type = $finance_type;
-	   	$finance = Finance::select('*')->where('finance_type',$finance_type)->get();	
+		$finance = Finance::select('*')->where('finance_type',$finance_type)->get();	
 	   	return view('admin.finance.financelist', compact('finance','finance_type'));	
 	}
 	
@@ -103,13 +92,13 @@ class FinanceController extends Controller
 	
 		$finance = Finance::find($request->id);    
 		$deletefinance = $finance->delete();
-		
    		if($deletefinance){
 			Session::flash('message', "Finance type deleted successfully!"); 
 			Session::flash('alert-class', 'alert-success');
 			return back();
 	 	}
     }
+    
     
     
     /**
@@ -124,6 +113,7 @@ class FinanceController extends Controller
 	}
 	
 	
+	
 	/**
 	* To Alter table
 	*
@@ -132,20 +122,8 @@ class FinanceController extends Controller
 	public function updateFinance(Request $request)
 	{
 		if(!empty($request->all())){
-		
-			$validator = Validator::make($request->all(),[											
-											// 'finance_type'		=> 'required',
-    										// 'main_title'		=> 'required',
-    										'monthly_price'		=> 'required'//,
-//     										'sub_title'			=> 'required',
-//     										'yearly_price'		=> 'required' ,
-//     										'indexes'			=> 'required',
-//     										'updates'			=> 'required',
-//     										'trackings'			=> 'required',
-//     										'summary_chart'		=> 'required',
-//     										'personalities'		=> 'required',
-//     										'forecast_strategy'	=> 'required',
-//     										'early_bird'		=> 'required'
+			$validator = Validator::make($request->all(),[
+    			'monthly_price'		=> 'required'
     		]);
     		
 			if($validator->fails()){    		
@@ -153,23 +131,22 @@ class FinanceController extends Controller
 			}
    			
             $updateArray = [											
-							'finance_type'		=>	$request->finance_type,										
-    						'main_title'		=>	$request->main_title,										
-    						'sub_title'			=>	$request->sub_title,										
-    						'monthly_price'		=>	$request->monthly_price,										
-    						'yearly_price'		=>	$request->yearly_price,										
-    						'indexes'			=>	$request->indexes,										
-    						'updates'			=>	$request->updates,										
-    						'trackings'			=>	$request->trackings,										
-    						'summary_chart'		=>	$request->summary_chart,										
-    						'personalities'		=>	$request->personalities,										
-    						'forecast_strategy'	=>	$request->forecast_strategy,										
-    						'early_bird'		=>	$request->early_bird
+				'finance_type'		=>	$request->finance_type,										
+    			'main_title'		=>	$request->main_title,										
+    			'sub_title'			=>	$request->sub_title,										
+    			'monthly_price'		=>	$request->monthly_price,										
+    			'yearly_price'		=>	$request->yearly_price,										
+    			'indexes'			=>	$request->indexes,										
+    			'updates'			=>	$request->updates,										
+    			'trackings'			=>	$request->trackings,										
+    			'summary_chart'		=>	$request->summary_chart,										
+    			'personalities'		=>	$request->personalities,										
+    			'forecast_strategy'	=>	$request->forecast_strategy,										
+    			'early_bird'		=>	$request->early_bird
 			];
 			$finance=Finance::where('id',$request->id)->update($updateArray);
 			
 			if(isset($finance)){
-			
 				Session::flash('message', "Finance updated successfully!"); 
 				Session::flash('alert-class', 'alert-success'); 
 				return redirect('admin/finance/list/'.$request->finance_type);	

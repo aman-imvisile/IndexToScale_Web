@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MainCategories;
+use App\Models\SubcategorySubscription;
 use App\Http\Requests;
 use Validator;
 use App\Models\Thumbnail;
@@ -25,6 +26,7 @@ class MainCategoriesController extends Controller
 	}
 	
 	
+	
 	/**
 	* Show the form to add new main_category
 	*
@@ -33,12 +35,10 @@ class MainCategoriesController extends Controller
 	public function add_main_category(Request $request)
 	{
 		if(!empty($request->all())){
-			
-   			$validator = Validator::make($request->all(),
-										[											
-											'main_category_name'	=> 'required',
-    										'main_category_image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    									]);
+   			$validator = Validator::make($request->all(),[											
+				'main_category_name'	=> 'required',
+    			'main_category_image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    		]);
 			if($validator->fails()){    		
 				return redirect('admin/movie/create')->withErrors($validator)->withInput();	
 			}
@@ -49,13 +49,12 @@ class MainCategoriesController extends Controller
             $imageurl=url('storage/app')."/".$filename;
 			
 			$maincategories=MainCategories::create([
-										'main_category_name'	=>	$request->main_category_name,  
-										'main_category_image'	=>	$imageurl,
-										'total_subscriptions'	=> '0'
+				'main_category_name'	=>	$request->main_category_name,  
+				'main_category_image'	=>	$imageurl,
+				'total_subscriptions'	=> '0'
 			]);
 						
-			if(isset($maincategories))
-			{
+			if(isset($maincategories)){
 				Session::flash('message', "New Main Category added successfully!"); 
 				Session::flash('alert-class', 'alert-success'); 
 				return redirect('admin/maincategory/list');	
@@ -67,6 +66,7 @@ class MainCategoriesController extends Controller
 	}
 	
 	
+	
 	/**
 	 * to Display all Main Categories
 	 *
@@ -76,5 +76,19 @@ class MainCategoriesController extends Controller
 	{
 	   	$main_categories = MainCategories::select('*')->orderBy('id', 'desc')->get();
 	   	return view('admin.main_categories.main_categorylist', compact('main_categories'));
+	}
+	
+	
+	
+	/**
+	 * to Display all Main Categories
+	 *
+	 * @return Response
+	 */
+	public function category_summary()
+	{
+	   	$categories = MainCategories::select('*')->orderBy('id', 'asc')->get();
+	   	//echo "<pre/>";print_r($categories);
+	   	return view('admin.main_categories.category_summary', compact('categories'));
 	}
 }

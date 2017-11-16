@@ -2,7 +2,6 @@
       <div class="main_container">
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
-            
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
             <div class="profile clearfix"  style="position:relative;">
@@ -37,39 +36,16 @@
                 <ul class="nav side-menu">
                   <li><a href="<?php echo e(url('admin/dashboard')); ?>"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-right"></span></a></li>
                   <li><a href="<?php echo e(url('admin/inbox')); ?>"><i class="fa fa-inbox"></i> Inbox <span class="fa fa-chevron-right"></span></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-users"></i>Staff <span class="fa fa-chevron-right"></span></a>
-                    <ul class="nav child_menu">
+                  <li><a href="<?php echo e(url('admin/user/summary')); ?>"><i class="fa fa-users"></i>Staff <span class="fa fa-chevron-right"></span></a>
+                    <!--<ul class="nav child_menu">
                     	<li class="add-btn"><a href="<?php echo e(url('admin/user/create')); ?>" class="btn btn-primary">Add User</a></li>
                     	<?php $__currentLoopData = $adminusers_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $username): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<li><a href="<?php echo e(url('admin/user/list/'.$username->id)); ?>"><?php echo e($username->username); ?></a></li>
   						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
+                    </ul>-->
                   </li>
                 
-                  <li><a href="javascript:void(0)"><i class="fa fa-sitemap"></i>Categories <span class="fa fa-chevron-right"></span></a>
-                    <ul class="nav child_menu">
-                    	<li class="add-btn"><a href="<?php echo e(url('admin/maincategory/create')); ?>" class="btn btn-primary">add category</a></li>
-                    	<?php $__currentLoopData = $main_category_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoryname): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    	
-						<li>
-							<?php if(count($categoryname->subcategories) > 0): ?>
-							<a href="javascript:void(0)"><?php echo e($categoryname->main_category_name); ?> <span class="fa fa-chevron-right"></span></a>
-							<?php else: ?>
-							<a href="<?php echo e(url('admin/property/list/'.$categoryname->id)); ?>"><?php echo e($categoryname->main_category_name); ?></a>
-							<?php endif; ?>
-							<?php if(count($categoryname->subcategories) > 0): ?>
-							<ul class="nav sub_menu">
-                    			<li class="add-btn"><a href="#" class="btn btn-primary">add subcategory</a></li>
-								<?php $__currentLoopData = $categoryname->subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategoryname): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            	<li class="sub_menu"><a href="<?php echo e(url('admin/property/list/'.$categoryname->id.'/'.$subcategoryname->id)); ?>"><?php echo e($subcategoryname->category_name); ?></a></li>
-                            	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                          	</ul>
-                          	<?php endif; ?>
-						</li>
-					
-  						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
-                  </li>
+                  <li><a href="<?php echo e(url('admin/category/summary')); ?>"><i class="fa fa-sitemap"></i>Categories <span class="fa fa-chevron-right"></span></a></li>
 
                   <li><a href="javascript:void(0)"><i class="fa fa-money"></i> Finances <span class="fa fa-chevron-right"></span></a>
                     <ul class="nav child_menu">

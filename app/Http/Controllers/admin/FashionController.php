@@ -9,20 +9,6 @@ use App\Http\Requests;
 class FashionController extends Controller
 {	
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		if(empty(Session::get('user_id'))){
-			return redirect('admin/login');
-		}
-		$resp = "";
-		return view('admin.index', array('res' => $resp));
-	}
-	
-	/**
 	* Show the form for creating a new resource.
 	*
 	* @return Response
@@ -33,8 +19,9 @@ class FashionController extends Controller
 	}
 	
 	
+	
 	/**
-	* Show the form to add new propert
+	* add new fashion
 	*
 	* @return Response
 	*/
@@ -42,34 +29,22 @@ class FashionController extends Controller
 	{
 		if(!empty($request->all())){
 			
-   			$validator = Validator::make($request->all(),
-										[											
-											'title'	=> 'required',
-    										'image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    									]);
+   			$validator = Validator::make($request->all(),[											
+				'title'	=> 'required',
+    			'image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    		]);
 			if($validator->fails()){    		
 				return redirect('admin/fashion/create')->withErrors($validator)->withInput();	
 			}
 			
 			$fashionImages 	= $request->file('image');
 			$filename = $image->store('fashion');
-			
 			$fashion=fashion::create([
-										'title'	=>	$request->title,  
-										'image'	=>	$filename
+				'title'	=>	$request->title,  
+				'image'	=>	$filename
 			]);
-													
-			// foreach ($request->images as $image) 
-// 			{
-// 				$filename = $image->store('fashion');
-// 				fashionImages::create([
-//                 						'fashion_id'	=> $fashion->id,
-//                 						'image'			=> $filename
-//             	]);
-//         	}
-        							
-			if(isset($fashion))
-			{
+						
+			if(isset($fashion)){
 				Session::flash('message', "New Fashion added successfully!"); 
 				Session::flash('alert-class', 'alert-success'); 
 				return redirect('admin/fashion/list');	
@@ -79,6 +54,7 @@ class FashionController extends Controller
 			return redirect('admin/fashion/create');
 		}
 	}
+	
 	
 	
 	/**

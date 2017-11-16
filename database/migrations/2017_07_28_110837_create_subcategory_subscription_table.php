@@ -22,6 +22,8 @@ class CreateSubcategorySubscriptionTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

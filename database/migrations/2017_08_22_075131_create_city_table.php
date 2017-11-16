@@ -22,6 +22,8 @@ class CreateCityTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

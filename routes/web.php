@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,15 +10,30 @@
 |
 */
 //Start frontend
+Route::get('savedlibrary',function () {
+    return view('frontend.property.savedlibrary');
+});
+
+Route::get('ads',function () {
+    return view('frontend.property.ads');
+});
+Route::get('collections',function () {
+    return view('frontend.property.collections');
+});
+Route::get('search',function () {
+    return view('frontend.property.search');
+});
+
+
 Route::post('frontend/user/login','Auth\LoginController@login');
 Route::get('frontend/user/logout','Auth\LoginController@logout');
 Route::post('frontend/user/register','Auth\RegisterController@registerUser');
-Route::get('/','HomeController@index');
+Route::get('/',['as'=>'home', 'uses'=>'HomeController@index']);
 Route::post('subscribe/maincategory','HomeController@subscribeMainCategory');
 
 //Start Property section
 Route::get('subcategory/{catid}','PropertyController@index');
-Route::get('property/list/{catid}/{subcatid}','PropertyController@propoertylist');
+Route::get('property/list/{catid}/{subcatid}','PropertyController@propertyList');
 Route::post('property/subscribe/subcategory','PropertyController@subscribeSubCategory');
 Route::post('property/viewsingleproperty','PropertyController@viewSingleProperty');
 Route::post('property/filter','PropertyController@propertyFilter');
@@ -27,7 +41,7 @@ Route::post('property/filter','PropertyController@propertyFilter');
 
 //end frontend section
 
-//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 //Start admin section
 Route::get('admin/login','admin\auth\LoginController@create');
 
@@ -50,7 +64,7 @@ Route::get('profile/edit/{id}', 'admin\UserController@editAdmin');
 Route::post('profile/update', 'admin\UserController@updateAdmin');
 
 //Internal mailbox system
-Route::get('inbox/', 'admin\InboxController@inboxlist');
+Route::get('inbox', ['as'=>'inbox' ,'uses'=> 'admin\InboxController@inboxlist']);
 Route::post('inbox', 'admin\InboxController@inboxlist');
 
 //property data
@@ -70,10 +84,12 @@ Route::post('fashion/list', 'admin\FashionController@fashionlist');
 
 //**************End for all admin****************
 
-
+Route::get('products','admin\ProductController@products');
+Route::post('products/import','admin\ProductController@import');
 
 //***********For superadmin***********************************
 Route::group(['middleware'=> 'SuperAdmin', 'prefix'=>'admin'], function(){
+
 
 //admin user data
 Route::get('user/list/{id}', 'admin\UserController@useractivity');
@@ -82,6 +98,9 @@ Route::get('users/list/{user_type}', 'admin\UserController@userlist');
 Route::post('users/list', 'admin\UserController@userlist');
 Route::get('user/create', 'admin\UserController@create');
 Route::post('user/create', 'admin\UserController@adduser');
+Route::get('user/summary', 'admin\UserController@user_summary');
+Route::post('user/summary', 'admin\UserController@user_summary');
+
 
 //property data
 Route::get('property/create', 'admin\PropertyController@create');
@@ -89,10 +108,14 @@ Route::post('property/create', 'admin\PropertyController@addproperty');
 Route::get('property/edit/{id}', 'admin\PropertyController@edit');
 Route::post('property/update', 'admin\PropertyController@update');
 Route::get('property/delete/{id}','admin\PropertyController@delete');
+Route::post('property/import', 'admin\PropertyController@import');
+Route::get('property/export/{type}', 'admin\PropertyController@export');
 
 //Main Category data
 Route::get('maincategory/create', 'admin\MainCategoriesController@create');
 Route::post('maincategory/create', 'admin\MainCategoriesController@add_main_category');
+Route::get('category/summary', 'admin\MainCategoriesController@category_summary');
+Route::post('category/summary', 'admin\MainCategoriesController@category_summary');
 
 // finance data
 Route::get('finance/create', 'admin\FinanceController@create');
@@ -104,30 +127,6 @@ Route::post('finance/update', 'admin\FinanceController@updateFinance');
 Route::get('finance/delete/{id}','admin\FinanceController@deleteFinancetype');
 
 
-
-//admin user data
-// Route::get('user/create', 'admin\UserController@create');
-// Route::post('user/create', 'admin\UserController@adduser');
-// Route::get('user/list/{id}', 'admin\UserController@userlist');
-// Route::post('user/list', 'admin\UserController@userlist');
-// Route::get('user/delete/{id}', 'admin\UserController@deleteUser');
-// Route::get('user/edit/{id}', 'admin\UserController@editUser');
-// Route::post('user/update', 'admin\UserController@updateUser');
-// 
-// //property data
-// Route::get('property/create', 'admin\PropertyController@create');
-// Route::post('property/create', 'admin\PropertyController@addproperty');
-// Route::get('property/list/{catid}/{subcatid}', 'admin\PropertyController@propertylist');
-// Route::post('property/list', 'admin\PropertyController@propertylist');
-// Route::get('property/edit/{id}', 'admin\PropertyController@edit');
-// Route::post('property/update', 'admin\PropertyController@update');
-// Route::get('property/delete/{id}','admin\PropertyController@delete');
-// 
-// //Main Category data
-// Route::get('maincategory/create', 'admin\MainCategoriesController@create');
-// Route::post('maincategory/create', 'admin\MainCategoriesController@add_main_category');
-//Route::get('maincategory/list', 'admin\MainCategoriesController@main_category_list');
-//Route::post('maincategory/list', 'admin\MainCategoriesController@main_category_list');
 
 // User Types
 Route::get('userType/add', 'admin\UserController@addnew_userType');
@@ -147,6 +146,6 @@ Route::post('property/subcategory/create', 'admin\PropertyCategoryController@cre
 Route::get('fashion/create', 'admin\FashionController@create');
 Route::post('fashion/create', 'admin\FashionController@create');
 
-});
+ });
 
 //***********End for super admin***********************************

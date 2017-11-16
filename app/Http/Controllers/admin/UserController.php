@@ -32,6 +32,8 @@ class UserController extends Controller
     	return view('admin.admin_users.adduser',array('userTypes'=>$userTypes));
     }
     
+    
+    
 	/**
 	* To save newuser's data to databse
 	*
@@ -87,6 +89,8 @@ class UserController extends Controller
 		}
 	}
 	
+	
+	
 	/**
 	* Display a listing of all the users with user_type 2(Admin Users).
 	*
@@ -97,6 +101,20 @@ class UserController extends Controller
 	   	$users = User::select('*')->where('user_type',$user_type) ->orderBy('id', 'desc')->get();
 		return view('admin.admin_users.userlist', array('users' =>$users));
 	}
+	
+	
+	
+	/**
+	* Display a listing of all the users with user_type 2(Admin Users).
+	*
+	* @return Response
+	*/
+	public function user_summary()
+	{
+	   	$users = User::select('*')->where('user_type',$user_type) ->orderBy('id', 'desc')->get();
+		return view('admin.admin_users.user_summary', array('users' =>$users));
+	}
+	
 	
 	
 	
@@ -131,6 +149,7 @@ class UserController extends Controller
     }
     
     
+    
     /**
 	* To Alter table
 	*
@@ -142,6 +161,7 @@ class UserController extends Controller
 	   	$user = User::select('*')->where('id','=', $id)->first();	   
 	   	return view('admin.admin_users.edituser', array('user'=>$user));		
 	}
+	
 	
 	
 	/**
@@ -204,6 +224,7 @@ class UserController extends Controller
 	}
 	
 	
+	
 	/**
 	* To create newuser
 	*
@@ -213,6 +234,8 @@ class UserController extends Controller
     {
     	return view('admin.admin_users.addusertype');
     }
+    
+    
     
 	/**
 	* To save new userType to databse
@@ -245,6 +268,7 @@ class UserController extends Controller
 	}
 	
 	
+	
 	/**
 	* To Edit newuser
 	*
@@ -257,7 +281,10 @@ class UserController extends Controller
 	 
     	return view('admin.admin_users.editusertype',array('userType'=>$userType));
     }
-		/**
+	
+	
+	
+	/**
 	* To save new userType to databse
 	*
 	* @return Response
@@ -288,6 +315,8 @@ class UserController extends Controller
 		}
 	}
 	
+	
+	
 	/**
 	* Display all userTypes
 	*
@@ -299,7 +328,9 @@ class UserController extends Controller
 		return view('admin.admin_users.usertypelist', array('usertype' =>$usertype));
 	}
 	
-		/**
+	
+	
+	/**
 	* To Alter table
 	*
 	* to delete admin user from database
@@ -316,6 +347,8 @@ class UserController extends Controller
 	 	}
     }
 	        
+    
+    
     /**
 	* To Alter table
 	*
@@ -327,6 +360,7 @@ class UserController extends Controller
 	   	$users = User::select('*')->where('id', $id)->orderBy('id', 'desc')->first()->toArray();  
 	   	return view('admin.userprofile', array('users'=>$users));		
 	}
+	
 	
 	
 	/**

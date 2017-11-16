@@ -2,7 +2,6 @@
       <div class="main_container">
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
-            
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
             <div class="profile clearfix"  style="position:relative;">
@@ -37,39 +36,16 @@
                 <ul class="nav side-menu">
                   <li><a href="{{url('admin/dashboard')}}"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-right"></span></a></li>
                   <li><a href="{{url('admin/inbox')}}"><i class="fa fa-inbox"></i> Inbox <span class="fa fa-chevron-right"></span></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-users"></i>Staff <span class="fa fa-chevron-right"></span></a>
-                    <ul class="nav child_menu">
+                  <li><a href="{{url('admin/user/summary')}}"><i class="fa fa-users"></i>Staff <span class="fa fa-chevron-right"></span></a>
+                    <!--<ul class="nav child_menu">
                     	<li class="add-btn"><a href="{{url('admin/user/create')}}" class="btn btn-primary">Add User</a></li>
                     	@foreach($adminusers_data as $username)
 							<li><a href="{{url('admin/user/list/'.$username->id)}}">{{ $username->username}}</a></li>
   						@endforeach
-                    </ul>
+                    </ul>-->
                   </li>
                 
-                  <li><a href="javascript:void(0)"><i class="fa fa-sitemap"></i>Categories <span class="fa fa-chevron-right"></span></a>
-                    <ul class="nav child_menu">
-                    	<li class="add-btn"><a href="{{url('admin/maincategory/create')}}" class="btn btn-primary">add category</a></li>
-                    	@foreach($main_category_data as $categoryname)
-                    	
-						<li>
-							@if(count($categoryname->subcategories) > 0)
-							<a href="javascript:void(0)">{{ $categoryname->main_category_name}} <span class="fa fa-chevron-right"></span></a>
-							@else
-							<a href="{{url('admin/property/list/'.$categoryname->id)}}">{{ $categoryname->main_category_name}}</a>
-							@endif
-							@if(count($categoryname->subcategories) > 0)
-							<ul class="nav sub_menu">
-                    			<li class="add-btn"><a href="#" class="btn btn-primary">add subcategory</a></li>
-								@foreach($categoryname->subcategories as $subcategoryname)
-                            	<li class="sub_menu"><a href="{{url('admin/property/list/'.$categoryname->id.'/'.$subcategoryname->id)}}">{{ $subcategoryname->category_name}}</a></li>
-                            	@endforeach
-                          	</ul>
-                          	@endif
-						</li>
-					
-  						@endforeach
-                    </ul>
-                  </li>
+                  <li><a href="{{url('admin/category/summary')}}"><i class="fa fa-sitemap"></i>Categories <span class="fa fa-chevron-right"></span></a></li>
 
                   <li><a href="javascript:void(0)"><i class="fa fa-money"></i> Finances <span class="fa fa-chevron-right"></span></a>
                     <ul class="nav child_menu">

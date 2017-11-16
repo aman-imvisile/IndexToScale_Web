@@ -79,9 +79,6 @@ $('body').on('click','.property-detail-view',function(){
      //Mange UL li width
       $('.residential_grid_ul > li').width('').width('15%');		
      $(document).find('.residential_grid').width('80%');
-	
-   
-      
      }
         // Hide it after 2 seconds
 	 setTimeout(function(){
@@ -155,65 +152,8 @@ $('#btn-property-detail').on('click',function(){
 		type:'post',
 		datatype:'json'
 		}).done(function(response){
-				var propertyhtml= '<ul class="residential_grid_ul">';
-		if(response.success==true)
-		{
-              for(var p=0; p<response.data.length; p++)
-               {
-            		propertyhtml +='<li>';
-                	propertyhtml +='<div class="residential_img property-detail-view" property-id="'+response.data[p].id+'">';
-               		propertyhtml +='<img  src="'+response.data[p].image+'" class="img-responsive">';
-                	propertyhtml +='<div class="property_name">';
-                	propertyhtml +='<p>'+response.data[p].property_name+'</p>';
-                	propertyhtml +='</div>';
-                	propertyhtml +='<div class="property_number">';
-                	propertyhtml +='<div class="hb-md-margin"><span class="hb1 hb-md1  color-bg1 color_white">90</span></div>';
-               	 	propertyhtml +='</div>';
-                	propertyhtml +='</div>';
-                	propertyhtml +='<div class="property_list">';
-                	propertyhtml +='<ul>';
-                	var  property_link_length=response.data[p].property_links.length;
-                    if(property_link_length>0)
-                    {
-            	 	   for(var l=0; l<property_link_length; l++)
-            	 	     {
-            	 	     	if (l === 3) { break; }
-            	 	     	
-                        	propertyhtml +='<li>';
-                        	propertyhtml +='<div class="col-sm-3 col-xs-3">';
-                            propertyhtml += '<img src="'+response.data[p].property_links[l].icon_image+'" class="img-responsive">';
-                            propertyhtml += '</div>';
-                            propertyhtml +=  '<div class="col-sm-9 col-xs-9 text-right">';
-                            propertyhtml +=  '<h4>'+response.data[p].property_links[l].main_title+'</h4>';
-                            propertyhtml +=  '<h5>'+response.data[p].property_links[l].small_title+'</h5>';
-                            propertyhtml +=  '</div>';
-                            propertyhtml +=  '<div class="clearfix"></div>';
-                            propertyhtml +=   '</li>';
-                 			
-                          }    
-                      }                  
-                           
-                  	propertyhtml +='</ul>';                     
-                 	  if(property_link_length>3)
-                 	  {
-                 	  	var morevalue=parseInt(property_link_length)-parseInt(3);               
-                       propertyhtml += '<p property-id="'+response.data[p].id+'"  class="blue_color property-detail-view"><i>+'+morevalue+' more</i></p>';
-                       propertyhtml +=  '<div class="clearfix"></div>';
-                      }
-                 	propertyhtml += '</div>';
-                 	propertyhtml +=  '</li>'; 
-                }  
-               }             
-			   else
-				{				
-				 propertyhtml +='<li>No record  found!</li>';
-				}
-               	
-                 
-              propertyhtml += '</ul>';
-	
 		
-		$('.residential_grid').html(propertyhtml);		
+		    $(".residential_grid").empty().html(response);
 		    // Hide it after 1 second
 	 		setTimeout(function(){
     		$.LoadingOverlay("hide");
@@ -223,7 +163,41 @@ $('#btn-property-detail').on('click',function(){
 	
 	});
 
+//Pagination property property listing
 
+ $(document).on('click', '.pagination a',function(event)
+    {
+        $('li').removeClass('active');
+        $(this).parent('li').addClass('active');
+        event.preventDefault();
+        var myurl = $(this).attr('href');
+       var page=$(this).attr('href').split('page=')[1];
+       getData(page);
+    });
+
+function getData(page){
+        $.ajax(
+        {
+            url: '?page=' + page,
+            type: "get",
+            datatype: "html",
+            // beforeSend: function()
+            // {
+            //     you can show your loader 
+            // }
+        })
+        .done(function(data)
+        {
+            console.log(data);
+            
+            $(".residential_grid").empty().html(data);
+            location.hash = page;
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError)
+        {
+              alert('No response from server');
+        });
+	}
 
 
 </script>

@@ -22,6 +22,8 @@ class CreateMaincategorySubscriptionLogsTable extends Migration
     	});
     }
 
+
+
     /**
      * Reverse the migrations.
      *

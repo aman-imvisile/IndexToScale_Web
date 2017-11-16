@@ -21,6 +21,8 @@ class CreateCountryTableTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

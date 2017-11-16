@@ -21,6 +21,8 @@ class CreatePropertyImagesTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

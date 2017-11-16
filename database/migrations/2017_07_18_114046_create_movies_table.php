@@ -21,6 +21,8 @@ class CreateMoviesTable extends Migration
             $table->timestamps('created_at');
         });
     }
+    
+    
 
     /**
      * Reverse the migrations.

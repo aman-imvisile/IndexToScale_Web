@@ -110,12 +110,65 @@
 
   </div>
 </div>
+
+  
+  <!--- sign in section-->
+  <section class="filter_right sign-in"  style="display:none">
+    
+	   <div class="signin-block">
+            <div class="col-sm-12 signin-block-content">
+                
+                <form>
+                    <h5>Sign in</h5>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                    </div>  
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                           <button type="button" class="btn btn-secondary btn-lg btn-block custom-btn">Enter</button>
+                        </div>
+                    </div>  
+                   <p> <a href="#">Forget email?</a></p><br><br><br>
+                    <p> <a href="#">Sign up</a></p><br><br>
+                    <div class="form-group row">
+                        <div class="col-sm-7">
+                           <select class="form-control custom-select" id="">
+                               <option>English(United Kingdom)</option>
+                               <option>a</option>
+                               <option>b</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <ul class="sign-in-menu">
+                                <li><a href="#">Help</a></li>                       
+                                <li><a href="#">Privacy</a></li> 
+                                <li><a href="#">Terms</a></li>     
+                            </ul>
+                        </div>
+                    </div>  
+                </form>
+           </div>
+        </div>   
+  </section>
+  
+<!--sign in end------->
 <!-- user register Modal End -->
 <script type="text/javascript">
   $("#user-login").on('click',function(){
-
-	$("#headeruserLoginModel").modal();
-
+	if($('.filter_right').is(":visible"))
+  		{ 
+	     $('.filter_right').css('display','none');
+	     }
+	     else {
+	     $('.filter_right').css('display','block');
+	     }
  });
  
  
@@ -152,13 +205,13 @@ $('#headerloginUser').on('submit',function(e){
        
     });
     
-});
+  });
 
 //user register
 $('#headeruserRegister').on('submit',function(e){
   // Show full page LoadingOverlay
     $.LoadingOverlay("show");
-  e.preventDefault();
+    e.preventDefault();
 
 
     $.ajax({

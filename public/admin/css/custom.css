@@ -49,3 +49,55 @@
 .preview {
     margin-top: 50px;
 }
+.border-radius{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.border-radius{
+    padding: 2px;
+    border: 1px solid #000;
+}
+.custom-panel .tile-stats{
+    padding: 0px;
+}
+.custom-panel .tile-stats .count{
+    float: left!important;
+    display: inline-block!important;
+} 
+.custom-panel .tile-stats h3{
+    float: left!important;
+    display: inline-block!important;
+    margin-top: 5%;
+    padding-right: 5%;
+} 
+.custom-panel .tile-stats .mysubsdivcount{
+    float: left;
+    width: 100%;
+    padding: 0px 15px;
+}
+.custom-panel .tile-stats .mysubsdivcount h5{
+    float: left;
+    padding-left: 14%;
+}
+.custom-panel .tile-stats .dashboard-blocks {
+    float: left;
+}
+/******************sign in toggle**************/
+
+.signin-block{
+    margin: 0 auto;
+}
+.signin-block .signin-block form{
+    margin-top:10%;
+}
+.signin-block .signin-block form h5{
+    color: #fff;
+    padding-left: 2%;
+}

@@ -16,6 +16,8 @@ class AllAdmin extends Migration
         //
     }
 
+
+
     /**
      * Reverse the migrations.
      *

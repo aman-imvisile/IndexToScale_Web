@@ -18,6 +18,7 @@ class SubcategoryController extends Controller
 	}
 	
 	
+	
 	/**
 	* Show the form to add new main_category
 	*
@@ -26,13 +27,11 @@ class SubcategoryController extends Controller
 	public function add_sub_category(Request $request)
 	{
 		if(!empty($request->all())){
-
-   			$validator = Validator::make($request->all(),
-										[											
-											'main_category_id'	=> 'required',						
-											'category_name'		=> 'required',
-    										'category_image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    									]);
+   			$validator = Validator::make($request->all(),[											
+				'main_category_id'	=> 'required',						
+				'category_name'		=> 'required',
+    			'category_image'	=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    		]);
 			if($validator->fails()){    		
 				return redirect('admin/subcategory/create')->withErrors($validator)->withInput();	
 			}
@@ -43,14 +42,13 @@ class SubcategoryController extends Controller
             $imageurl=url('storage/app')."/".$filename;
 			
 			$maincategories=MainCategories::create([
-										'main_category_id'			=>	$request->main_category_id, 
-										'category_name'				=>	$request->category_name,  
-										'category_image'			=>	$imageurl,
-										'total_subscriptions_counts'	=> '0'
+				'main_category_id'			=>	$request->main_category_id, 
+				'category_name'				=>	$request->category_name,  
+				'category_image'			=>	$imageurl,
+				'total_subscriptions_counts'	=> '0'
 			]);
 						
-			if(isset($maincategories))
-			{
+			if(isset($maincategories)){
 				Session::flash('message', "New Main Category added successfully!"); 
 				Session::flash('alert-class', 'alert-success'); 
 				return redirect('admin/subcategory/list');	

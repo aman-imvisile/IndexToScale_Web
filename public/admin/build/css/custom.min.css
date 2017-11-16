@@ -4380,5 +4380,11 @@ html, body {
 .nav-sm footer {
     margin-left: 70px;
 }
-
+}
+/*----------------------12-Sep-2017---------------------------*/
+#navbarCollapse .dropdown-menu a {
+    text-transform: capitalize;
+}
+#sidebar-menu .sub_menu > a {
+    color: #ccc;
 }

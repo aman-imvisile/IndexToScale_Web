@@ -9,7 +9,7 @@
 	</div>
 	<div id="navbarCollapse" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Summary</a></li>
+			<li class="active"><a href="<?php echo e(url('admin/category/summary')); ?>">Summary</a></li>
 			<?php $__currentLoopData = $maincategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoryname): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<li class="dropdown">
 				<?php if(count($categoryname->subcategories) > 0): ?>

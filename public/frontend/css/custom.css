@@ -1,0 +1,85 @@
+.filter_right{
+    height: auto!important;
+}
+h4.padd-filter {
+    border-top: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 0px!important;
+    background: rgba(12, 191, 249, 0.39);
+}
+.accor-heading h4 .fa{
+    float:right;
+}
+.accor-heading h4 small{
+    color: #00ceff;
+}
+.panel-content .panel-links{
+    text-align: right;
+}
+.panel-content .panel-links a{
+    padding: 0 15px;
+    color: #ddd;
+    text-decoration: none;
+}
+.panel-content .panel-links a:hover{
+    color: #00ceff;
+    text-decoration: none;
+}
+.panel-content .sort{
+    border:1px solid #ffffff80;
+    border-right: 0;
+    padding: 1px;
+    padding-right: 16%;
+    border-radius: 5px 0 0px 5px;
+}
+.panel-content .custom-select{
+    border-left: 0px !important;
+    border: 1px solid #ffffff80;
+    background: transparent;
+    margin-left: -4px;
+    border-radius: 0px 5px 5px 0;
+    width: 67%;
+}
+.panel-content .personality-bar{
+    padding: 0px;
+    margin-top: 10px;
+}
+.panel-content .personality-bar h6 .indexes{
+    float: right;
+}
+.panel-content .progress {
+    height: 8px!important;
+    margin-bottom: 20px;
+    border-radius: 0px!important;
+    margin-top: 13px;
+}
+/******* data ranger*****/
+.value {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin: 0 0 0 -20px;
+  width: 40px;
+  text-align: center;
+  display: block;
+  
+  /* optional */
+  
+ /* font-weight: normal;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 14px;
+  color: #333;*/
+}
+
+.price-range-both.value {
+  width: 100px;
+  margin: 0 0 0 -50px;
+  top: 26px;
+}
+
+.price-range-both {
+  display: none; 
+}
+
+.value i {
+  font-style: normal;
+}

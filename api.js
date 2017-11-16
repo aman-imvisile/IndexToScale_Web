@@ -21,9 +21,9 @@ var md5 = require('md5');
 /*-----db connection-------*/
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'imvisi5_judgingasystem',
-  password : '@R&wPhdRTxp;',
-  database : 'imvisi5_indextoscale'
+  user     : 'imvisile_main',
+  password : 'imV!s!lE#8687@',
+  database : 'imvisile_indextoscale'
 });
 connection.connect();
  
@@ -42,7 +42,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Sign up API
 app.post('/signup', function (req, res) {
-  	
+console.log('------------------------------------signup hit--------------------');
+console.log(req.body);
   	var fullname		= req.body.fullname;
 	var username		= req.body.username;
   	var email			= req.body.email;
@@ -51,8 +52,8 @@ app.post('/signup', function (req, res) {
   	var longitude 		= req.body.longitude;
   	var address			= req.body.address;
   	var data			= { "error":1, "info":"" }
-	password = md5(password);
-	
+	//password = md5(password);
+	console.log("SELECT * FROM `its_user_details` WHERE (`username` = '"+username+"' OR `email` = '"+email+"') limit 1");
 	connection.query("SELECT * FROM `its_user_details` WHERE (`username` = '"+username+"' OR `email` = '"+email+"') limit 1" ,function(err, existingdata, fields){
 	  if(existingdata.length != 0){
 	  		console.log(existingdata);
@@ -61,7 +62,8 @@ app.post('/signup', function (req, res) {
 			res.json(data);
 	  }else{
     	if((!!fullname) && (!!username) && (!!email) && (!!password) && (!!latitude) && (!!longitude) && (!!address)){
-			connection.query("INSERT INTO `its_user_details`(`fullname`, `username`, `email`, `password`, `latitude`, `longitude`, `address`,`user_type`) VALUES ('"+fullname+"','"+username+"','"+email+"','"+password+"','"+latitude+"','"+longitude+"', '"+address+"','3')", function(error,result,rows){
+    		console.log("INSERT INTO `its_user_details`(`fullname`, `username`, `email`, `password`, `latitude`, `longitude`, `address`,`user_type`) VALUES ('"+fullname+"','"+username+"','"+email+"','"+md5(password)+"','"+latitude+"','"+longitude+"', '"+address+"','3')");
+			connection.query("INSERT INTO `its_user_details`(`fullname`, `username`, `email`, `password`, `latitude`, `longitude`, `address`,`user_type`) VALUES ('"+fullname+"','"+username+"','"+email+"','"+md5(password)+"','"+latitude+"','"+longitude+"', '"+address+"','3')", function(error,result,rows){
 				var latinsertid = result.insertId;
 				connection.query("SELECT * FROM `its_user_details` WHERE `id` = "+latinsertid+ " limit 1" ,function(err, updaterows, fields){
 					//console.log(updaterows);
@@ -83,7 +85,8 @@ app.post('/signup', function (req, res) {
 
 // API to login user
 app.post('/Loginuser', function (req, res) {
-
+console.log('------------------------------------login hit--------------------');
+console.log(req.body);
   	var username		= req.body.username;
   	var password		= req.body.password;
   	var latitude 		= req.body.latitude;
@@ -93,6 +96,7 @@ app.post('/Loginuser', function (req, res) {
   if(!!username){
 	if(!!password){
   		var encPassword	= md5(password);
+  		console.log("SELECT * FROM `its_user_details` WHERE (`username` = '"+username+"' OR `email` = '"+username+"') AND `password` = '"+encPassword+"' AND `user_type` = '3' ");
 		connection.query("SELECT * FROM `its_user_details` WHERE (`username` = '"+username+"' OR `email` = '"+username+"') AND `password` = '"+encPassword+"' AND `user_type` = '3' " ,function(err, result, fields){
 			//console.log(result);
 			if(result.length != 0){
@@ -119,6 +123,8 @@ app.post('/Loginuser', function (req, res) {
 
 // API to Get All Main Categories
 app.post('/getall_main_Categories', function (req, res) {
+console.log('------------------------------------get all categories hit--------------------');
+console.log(req.body);	
 
   	var userid = req.body.userid;
   	var latitude = req.body.latitude;
@@ -178,6 +184,8 @@ app.post('/subscribeMainCategory', function (req, res) {
 
 // API to subscribe Main Category
 app.post('/subscribe_Categories', function (req, res) {
+console.log('------------------------------------subscribe categories hit--------------------');
+console.log(req.body);	
 
   	var userid = req.body.userid;
   	var maincategory_id = req.body.maincategory_id;
@@ -214,6 +222,8 @@ app.post('/subscribe_Categories', function (req, res) {
 
 //API to Get Properties by Category
 app.post('/get_Subcategory_data_by_Main_CategoryID', function (req, res) {
+console.log('------------------------------------get data by category id hit--------------------');
+console.log(req.body);	
 
   	var category_id = req.body.category_id;
   	var sub_category_id = req.body.sub_category_id;
@@ -244,11 +254,14 @@ app.post('/get_Subcategory_data_by_Main_CategoryID', function (req, res) {
 
 // API To check if username already exist.
 app.post('/check_username_exists', function (req, res) {
+console.log('------------------------------------username exists hit--------------------');
+console.log(req.body);
 
   	var username		= req.body.username;
   	var data = { "error":1, "info":"" };
 	
   if(!!username){
+  		console.log("SELECT * FROM `its_user_details` WHERE `username` = '"+username+"' AND `user_type` = '3' ");
 		connection.query("SELECT * FROM `its_user_details` WHERE `username` = '"+username+"' AND `user_type` = '3' " ,function(err, result, fields){
 			//console.log(result);
 			if(result.length == 0){
@@ -272,11 +285,14 @@ app.post('/check_username_exists', function (req, res) {
 
 // API to increase user visitors
 app.post('/get_profile_info', function (req, res) {
+console.log('------------------------------------get profile info hit--------------------');
+console.log(req.body);	
 
   	var userid		= req.body.userid;
   	var data = { "error":1, "info":"" };
 	
   if(!!userid){
+  		console.log("SELECT * FROM `its_user_details` WHERE `id` = '"+userid+"' AND `user_type` = '3' ");
 		connection.query("SELECT * FROM `its_user_details` WHERE `id` = '"+userid+"' AND `user_type` = '3' " ,function(err, userDetails, fields){
 			//console.log(userDetails);
 			if(userDetails.length != 0){

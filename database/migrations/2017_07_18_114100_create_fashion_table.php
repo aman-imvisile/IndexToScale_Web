@@ -21,6 +21,8 @@ class CreateFashionTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

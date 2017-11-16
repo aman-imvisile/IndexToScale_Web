@@ -23,6 +23,8 @@ class CreateSubcategorySubscriptionLogsTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

@@ -23,6 +23,9 @@ class CreatePropertyExtraLink extends Migration
             $table->timestamps()->useCurrent();
         });
     }
+    
+    
+    
     /**
      * Reverse the migrations.
      *

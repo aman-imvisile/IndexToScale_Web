@@ -22,6 +22,8 @@ class CreateFinanceTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

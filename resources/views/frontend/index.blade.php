@@ -30,13 +30,15 @@
               </a>              
               <div class="switch1">
                  <input id="cmn-toggle-5" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
-                <label class="subcription-data">               
-                @if(isset($category->subscription_status_type) && !empty ($category->subscription_status_type) && $category->subscription_status_type==1)
-                <span id="{{$category->id}}" class="subscribe-number">{{$category->total_subscriptions}}</span>
+                <label class="subcription-data">      
+             
+                         
+                @if(isset($category->subCategoryTotalSubscription) && !empty ($category->subCategoryTotalSubscription) && $category->subscription_status_type==1)
+               
+                <span id="{{$category->id}}" class="subscribe-number">{{$category->subCategoryTotalSubscription}}</span>
                 <span id="{{$category->id}}" class="subscribe-unsbscribe subscribe-check">demo</span>                
                 @else               
-                <span id="{{$category->id}}" class="subscription-count">{{$category->total_subscriptions}}</span>
-                 <span id="{{$category->id}}" class="subscribe-unsbscribe subscribe">Subscribe</span>
+                <span id="{{$category->id}}" class="mainsubscription-count">{{$category->subCategoryTotalSubscription}}</span>
                 </span> 
                 @endif             
                 </label>             
@@ -189,205 +191,7 @@
 </section>
 @endsection
 @section('script')
-<script type="text/javascript">
-$(document).ready(function(){
-//For subscribe the main category
- $(document).on('click','.subscribe-unsbscribe',function(){
- 	  // Show full page LoadingOverlay
-    $.LoadingOverlay("show");
- 	var th= $(this); 
- 	main_category_id= th.attr('id'); 	
-  var _token= $("#_token").val();
- 	$.ajax({
-            type: "POST",
-            url: "{{url('subscribe/maincategory')}}",
-            data: {main_category_id: main_category_id, _token:_token},
-            success: function(response) 
-            {
 
-         	    var obj = jQuery.parseJSON(JSON.stringify(response));   
-           
-                if(obj.success==true)
-                {
-                  if(th.hasClass('subscribe'))
-                  {
-                    th.removeClass('subscribe').addClass('subscribe-check').html('demo');
-                    th.prev('span').removeClass('subscription-count').addClass('subscribe-number').html(obj.subscription_count.total_subscriptions);
-                  }  else if(th.hasClass('subscribe-check'))
-                    {
-                    th.removeClass('subscribe-check').addClass('subscribe').html('Subscribe');
-                    th.prev('span').removeClass('subscribe-number').addClass('subscription-count').html(obj.subscription_count.total_subscriptions);
-                  }
-                       // Hide it after 2 seconds
-	 				setTimeout(function(){
-     				$.LoadingOverlay("hide");
-	 				}, 1000); 
-                }else{
-                     // Hide it after 2 seconds
-	 				setTimeout(function(){
-     				$.LoadingOverlay("hide");
-	 				}, 1000); 
-                  $("#main_category_id").val(main_category_id);                 
-                  $("#userLoginModel").modal();
-
-
-                }                  
-              
-            }
-           
-          });
- 
-    });
-
-//user Login
-
-$('#loginUser').on('submit',function(e){
-  e.preventDefault();
-  // Show full page LoadingOverlay
-    $.LoadingOverlay("show");
- var Formdata = {email:$("#email").val(),password:$("#password").val(),_token:$("#_token").val()};
-
-    $.ajax({
-        url: "{{url('frontend/user/login')}}",
-        data: Formdata, 
-        type: 'POST',
-        success: function(data){
-        	
-          var loginObj=jQuery.parseJSON(JSON.stringify(data));
-          if(loginObj.success==true){
-          var main_category_id= $("#main_category_id").val(); 
-          var th= $("#th").val();  
-          var _token= $("#_token").val();
-          $.ajax({
-            type: "POST",
-            url: "{{url('subscribe/maincategory')}}",
-            data: {main_category_id: main_category_id, _token:_token},
-            success: function(response) 
-            {
-
-              var obj = jQuery.parseJSON(JSON.stringify(response));   
-           
-                if(obj.success==true)
-                {
-	     	    // Hide it after 2 seconds
-	 		    setTimeout(function(){
-     		    $.LoadingOverlay("hide");
-	 		    }, 1000); 
-                  $('#userLoginModel').modal('toggle');
-                  window.location.reload();
-
-                } 
-                  else                
-                {
-                 
-				     // Hide it after 2 seconds
-	 				setTimeout(function(){
-    				 $.LoadingOverlay("hide");
-	 				}, 1000); 
-
-                }                  
-              
-            }
-           
-          });
-		} else {		
-				printErrorMsg(loginObj.validator);
-				// Hide it after 2 seconds
-	 			setTimeout(function(){
-    			$.LoadingOverlay("hide");
-	 			}, 1000); 
-		}
-	}
-       
-    });
-    
-});
-
-//user register
-$('#userRegister').on('submit',function(e){
-  // Show full page LoadingOverlay
-    $.LoadingOverlay("show");
-  e.preventDefault();
-
-
-    $.ajax({
-        url: "{{url('frontend/user/register')}}",
-        data: new FormData($("#userRegister")[0]), 
-        dataType:'json',
-      	async:false,
-      	type:'post',
-      	processData: false,
-      	contentType: false,
-        success: function(data){
-          var main_category_id= $("#main_category_id").val();        
-          var _token= $("#_token").val();
-          var reggisterObj= jQuery.parseJSON(JSON.stringify(data)); 
-          if(reggisterObj.success==true){
-          $.ajax({
-            type: "POST",
-            url: "subscribe/maincategory",
-            data: {main_category_id: main_category_id, _token:_token},
-            success: function(response) 
-            {
-
-              var obj = jQuery.parseJSON(JSON.stringify(response));   
-           
-                if(obj.success==true)
-                {
-				       // Hide it after 2 seconds
-	 				setTimeout(function(){
-    				$.LoadingOverlay("hide");
-	 				}, 1000); 
-                  $('#userLoginModel').modal('toggle');
-                  window.location.reload();
-
-                }else{
-                 	   // Hide it after 2 seconds
-	 				setTimeout(function(){
-    				$.LoadingOverlay("hide");
-	 				}, 1000); 
-					printErrorMsg(obj.validator);
-
-                }                  
-              
-            }
-           
-          });
-		} else {
-		   // Hide it after 2 seconds
-	 		setTimeout(function(){
-    		$.LoadingOverlay("hide");
-	 		}, 1000); 
-			printErrorMsg(reggisterObj.validator);
-		
-		}
-
-        }
-    });
-    });
-    ///error message function
-    function printErrorMsg (msg) {
-
-	$(".print-error-msg").find("ul").html('');
-
-	$(".print-error-msg").css('display','block');
-
-	$.each( msg, function( key, value ) {
-
-		$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-
-	});
-
-  }
-
-
-
-///////
-
-
-});
-
-</script>
 @endsection
 
 

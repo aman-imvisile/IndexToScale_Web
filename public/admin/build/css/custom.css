@@ -4,7 +4,10 @@ html , body{
  height:100%;
  
 }
- 
+.custom-panel .top_tiles .tile-stats .count{
+    float: left!important;
+    display: inline-block!important;
+} 
 .full-width {
 	
  width:100%;
@@ -4242,3 +4245,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .dataTables_wrapper > .row{
   overflow:auto !important; /*prevent datatables overflowing its container*/
 }
+
+/******changes on 13 nov*****/
+

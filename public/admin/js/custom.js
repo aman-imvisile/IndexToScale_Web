@@ -106,8 +106,11 @@
       ///code start for add more property links 
       $("#addMore").on('click',function() {         
   
-      var linkshtml='<div class="form-group"><label for="terms">Url </label><input  class="form-control col-md-7 col-xs-12" type="text" name="url[]" required></div><div class="form-group"><label for="terms">Name/Price</label><input  class="form-control col-md-7 col-xs-12" type="text" name="main_title[]" required></div><div class="form-group"><label for="terms">Small Title</label><input class="form-control col-md-7 col-xs-12" type="text" name="small_title[]" required></div><div class="form-group"><label for="icon_image ">Image</label><input class="form-control col-md-7 col-xs-12" type="file" name="icon_image[]" required></div>';    
-      $("#form-step-2").append('<div class="extraTab"><h2 class="extra-link">Add Extra link</h2>'+linkshtml+'<span class="removeMore btn btn-danger">Remove </span></div>');     
+      var linkshtml='<div class="form-group col-md-6"><label for="terms">Url </label><input  class="form-control col-md-7 col-xs-12" type="text" name="url[]" required></div>';
+      linkshtml +='<div class="form-group col-md-6 "><label for="terms">Name/Price</label><input  class="form-control col-md-7 col-xs-12" type="text" name="main_title[]" required></div>';
+      linkshtml +='<div class="form-group col-md-6"><label for="terms">Small Title</label><input class="form-control col-md-7 col-xs-12" type="text" name="small_title[]" required></div>';
+      linkshtml +='<div class="form-group col-md-6"><label for="icon_image ">Image</label><input class="form-control col-md-7 col-xs-12" type="file" name="icon_image[]" required></div>';    
+      $("#form-step-2").append('<div class="clearfix"></div><div class="extraTab"><h2 class="extra-link">Add Extra link</h2>'+linkshtml+'<div class="form-group"><span class="removeMore btn btn-danger">Remove </span></div></div>');     
       });
       
      $(document).on('click', '.removeMore', function(e) {

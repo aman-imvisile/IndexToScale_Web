@@ -21,6 +21,8 @@ class CreateStateTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

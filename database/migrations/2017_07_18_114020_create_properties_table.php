@@ -21,8 +21,8 @@ class CreatePropertiesTable extends Migration
             $table->string('property_name');
             $table->string('latitude');
             $table->string('longitude');          
-            $table->integer('street_number');
-            $table->string('street_name');
+            $table->integer('street_number')->default('');
+            $table->string('street_name')->default('');
             $table->string('city');          
             $table->string('area');
             $table->string('address');
@@ -49,6 +49,8 @@ class CreatePropertiesTable extends Migration
             $table->timestamps('created_at');	
         });
     }
+
+
 
     /**
      * Reverse the migrations.

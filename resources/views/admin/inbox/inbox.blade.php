@@ -11,6 +11,7 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
+                  	{!! Breadcrumbs::render('inbox') !!}
                     <h2>Inbox<small>User Mail</small></h2>
                     <div class="clearfix"></div>
                   </div>

@@ -2,8 +2,8 @@
 @section('title', 'Add New Property')
 @section('menu_title', 'Categories')
 @section('content')
-	@include('admin.property.header')
-	</div>
+@include('admin.property.header')
+</div>
 </div>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -52,21 +52,21 @@
 											</div>
 											<div class="form-group col-md-6">
 												<label for="name">Area:</label>
-												<input id="area" class="form-control col-md-7 col-xs-12" type="text" name="area" required>
+												<input id="area" class="form-control col-md-7 col-xs-12" type="text" name="area">
 												@if($errors->has('area'))
 													<div class="alert">{{ $errors->first('area') }}</div>
 												@endif
 											</div>
 											<div class="form-group col-md-6">
 												<label for="name">Street Number:</label>
-												<input id="street_number" class="form-control col-md-7 col-xs-12" type="text" name="street_number" required>
+												<input id="street_number" class="form-control col-md-7 col-xs-12" type="text" name="street_number">
 												@if($errors->has('street_number'))
 													<div class="alert">{{ $errors->first('street_number') }}</div>
 												@endif
 											</div>
 											<div class="form-group col-md-6">
 												<label for="name">Street Name:</label>
-												<input id="street_name" class="form-control col-md-7 col-xs-12" type="text" name="street_name" required>
+												<input id="street_name" class="form-control col-md-7 col-xs-12" type="text" name="street_name">
 												@if($errors->has('street_name'))
 													<div class="alert">{{ $errors->first('street_name') }}</div>
 												@endif
@@ -111,6 +111,13 @@
 												<input type="text" id="property_name" name="property_name" required="required" class="form-control col-md-7 col-xs-12" >
 												@if($errors->has('property_name'))
 													<div class="alert">{{ $errors->first('property_name') }}</div>
+												@endif
+											</div>
+											<div class="form-group col-md-6">
+												<label for="use_for">Property Use For:</label>
+												<input type="text" id="use_for" name="use_for" placeholder="to let, for sale, short let" class="form-control col-md-7 col-xs-12" >
+												@if($errors->has('use_for'))
+													<div class="alert">{{ $errors->first('use_for') }}</div>
 												@endif
 											</div>
 											<div class="form-group col-md-6">

@@ -1,4 +1,8 @@
 <script type="text/javascript">
+$(document).ready(function(){
+ var width=$('.residential_grid_ul > li').width();
+
+})
 
 $('body').on('click','.property-detail-view',function(){
 	
@@ -19,7 +23,7 @@ $('body').on('click','.property-detail-view',function(){
 	 var obj = jQuery.parseJSON(JSON.stringify(response)); 	
 
 	 if(obj.success==true){
-	
+	 $('.input-group').width('89%');	
 	 var propertyHtml='';	
      propertyHtml +='<div class="result">';
      propertyHtml +='<div class="result-img"> <img src="'+obj.data.image+'" class="img-responsive">';
@@ -68,10 +72,13 @@ $('body').on('click','.property-detail-view',function(){
      
      th.addClass('image-bg');
      th.closest('li').siblings().find('div').removeClass('image-bg');
-      $('#btn-property-detail').removeClass('togle-butn-right').addClass('togle-butn-left');
-	  $('#btn-property-detail').find('i').removeClass('fa-chevron-left').addClass('fa-chevron-right');
+     $('#btn-property-detail').removeClass('togle-butn-right').addClass('togle-butn-left');
+	 $('#btn-property-detail').find('i').removeClass('fa-chevron-left').addClass('fa-chevron-right');
+	 $('.filter_right').css('display','none');	    
      $('#view-single-property').html(propertyHtml).show();
-      
+     //Mange UL li width
+      $('.residential_grid_ul > li').width('').width('15%');		
+     $(document).find('.residential_grid').width('80%');
      }
         // Hide it after 2 seconds
 	 setTimeout(function(){
@@ -97,19 +104,26 @@ $(window).scroll(function(){
 $('#btn-property-detail').on('click',function(){
 	
 	if($(this).hasClass('togle-butn-right'))
-	{
-		if($('#view-single-property').html().trim()!='')
-		{
-	
+	{		
+		    $('.residential_grid_ul > li').width('').width('15%');		
+		  $(document).find('.residential_grid').width('80%');	
+		  $('.input-group').width('89%');
 		  $(this).removeClass('togle-butn-right').addClass('togle-butn-left');
-		  $(this).find('i').removeClass('fa-chevron-left').addClass('fa-chevron-right');		
-		  $('#view-single-property').	css('display','block');
-		}
+		  $(this).find('i').removeClass('fa-chevron-left').addClass('fa-chevron-right');			
+		  $('.filter_right').css('display','block');	
+		  $('#view-single-property').css('display','none');
+	    
 	}	
 	else if($(this).hasClass('togle-butn-left'))
 	{
+		$('.residential_grid_ul > li').width('').width('19%');	
+		$(document).find('.residential_grid').width('100%');	
+		$('.input-group').width('100%');	
 		$(this).removeClass('togle-butn-left').addClass('togle-butn-right');
 		$(this).find('i').removeClass('fa-chevron-right').addClass('fa-chevron-left');
+		
+		$('.property-detail-view').removeClass('image-bg');
+		$('.filter_right').css('display','none');	
 		$('#view-single-property').css('display','none');
 	}	
 
@@ -118,6 +132,8 @@ $('#btn-property-detail').on('click',function(){
 //Property Filers
 
 	$('.filter-property').on('click',function(){
+	// Show full page LoadingOverlay
+    $.LoadingOverlay("show");	
 	var _token=$("#_token").val();
 	var dataArray = {};
 	 dataArray['main_cat_id']= $("#main_cat_id").val();	
@@ -136,13 +152,52 @@ $('#btn-property-detail').on('click',function(){
 		type:'post',
 		datatype:'json'
 		}).done(function(response){
-			
+		
+		    $(".residential_grid").empty().html(response);
+		    // Hide it after 1 second
+	 		setTimeout(function(){
+    		$.LoadingOverlay("hide");
+	 		}, 1000); 	
 		
 		});
 	
 	});
 
+//Pagination property property listing
 
+ $(document).on('click', '.pagination a',function(event)
+    {
+        $('li').removeClass('active');
+        $(this).parent('li').addClass('active');
+        event.preventDefault();
+        var myurl = $(this).attr('href');
+       var page=$(this).attr('href').split('page=')[1];
+       getData(page);
+    });
+
+function getData(page){
+        $.ajax(
+        {
+            url: '?page=' + page,
+            type: "get",
+            datatype: "html",
+            // beforeSend: function()
+            // {
+            //     you can show your loader 
+            // }
+        })
+        .done(function(data)
+        {
+            console.log(data);
+            
+            $(".residential_grid").empty().html(data);
+            location.hash = page;
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError)
+        {
+              alert('No response from server');
+        });
+	}
 
 
 </script>

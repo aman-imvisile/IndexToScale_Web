@@ -21,6 +21,8 @@ class CreateMainCategorySubscriptionTable extends Migration
             $table->timestamps('created_at');	
         });
     }
+    
+    
 
     /**
      * Reverse the migrations.
